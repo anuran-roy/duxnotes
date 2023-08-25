@@ -1,11 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useRoutes } from 'raviger';
+import routes from './routes/routes';
+import NavBar from './components/navbar';
 
 function App() {
+  let route = useRoutes(routes);
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -18,7 +21,11 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <div className="canvas">
+        <NavBar />
+        {route}
+      </div>
     </div>
   );
 }

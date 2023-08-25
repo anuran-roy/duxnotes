@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,441 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.background {
+  background-color: #282c34;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.background h1 {
+  color: white;
+  font-size: 1.25rem 0 1.25rem 0;
+}
+
+.headline {
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.second-headline {
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.third-headline {
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: row;
+  justify-content: top;
+  background-color: #282c34;
+  color: white;
+  padding: 1rem 0 0 0;
+  width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  text-align: center;
+  align-items: center;
+  background-color: #282c31;
+  color: white;
+  margin: 0 0 0 0;
+  padding: 0 0.75rem 0 0;
+  width: 12.5%;
+  min-height: 100vh;
+  position: sticky;
+  height: 100%;
+  overflow: scroll;
+}
+
+.navbar-item {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #39d2fe;
+  border-radius: 2.5%;
+}
+
+.navbar-item:hover {
+  background-color: #39d2fe;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 1rem;
+  /* border-bottom: 1px solid #39d2fe; */
+  border-radius: 2.5%;
+}
+
+.center-section {
+  width: 100rem;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin: 0;
+}
+
+.pad-section {
+  padding: 1%;
+  margin: 5%;
+}
+
+.editor-section {
+  justify-content: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: justify;
+  border: 1px solid #39d2fe;
+  border-radius: 1%;
+  max-border-radius: 15px;
+}
+
+.spacer-x {
+  margin: 0 30% 0 30%;
+  padding: 0 5% 0 5%;
+}
+
+.spacer-y {
+  margin: 2.5rem 0 2.5rem 0;
+}
+
+.notes-section {
+  /* display: grid; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: 10px;
+  grid-auto-flow: row; */
+  padding: 0 3rem 0 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0 2% 0 0;
+}
+
+.note {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  flex-grow: 2; 
+  width: 20vw;
+  /* max-width: 100%; */
+  min-height: 25%;
+  max-height: 50%;
+  border: 1px solid #39d2fe;
+  border-radius: 0.5%;
+  max-border-radius: 15px;
+  background-color: #282c34;
+  justify-content: space-between;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-button {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  /* margin: 0 1rem 0 1rem; */
+}
+
+.new-button:hover {
+  background-color: #39d2fe;
+  text-align: center;
+  align-items: center;
+  color: white;
+  border: none;
+  border-radius: 15%;
+  /* font-size: 1rem; */
+  /* cursor: pointer; */
+}
+
+.remove-button {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  /* margin: 0 1rem 0 1rem; */
+}
+
+.remove-button:hover {
+  background-color: red;
+  text-align: center;
+  align-items: center;
+  color: white;
+  border: none;
+  border-radius: 15%;
+  /* font-size: 1rem; */
+  /* cursor: pointer; */
+}
+
+.textarea {
+  width: 100%;
+  height: 100%;
+  resize: vertical;
+  border: solid 1px 0 0 0 #39d2fe;
+  /* scrollbar-width: none; */
+  overflow: auto;
+  background-color: #262c34;
+  color: white;
+  font-size: 1.25em;
+  /* border-radius: 25px; */
+  /* margin: 0.75rem 0 0.75rem 0; */
+}
+
+.datearea {
+  border: solid 1px #39d2fe;
+  scrollbar-width: none;
+  overflow: auto;
+  background-color: #262c34;
+  color: white;
+  font-size: 1em;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.h-50 {
+  height: 50%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.h-25 {
+  height: 25%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.h-75 {
+  height: 75%;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.my-auto {
+  margin: auto;
+}
+
+.my-0 {
+  margin: 0;
+}
+
+.my-1 {
+  margin: 0.25rem 0 0.25rem 0;
+}
+
+.my-2 {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.my-3 {
+  margin: 0.75rem 0 0.75rem 0;
+}
+
+.my-4 {
+  margin: 1rem 0 1rem 0;
+}
+
+.my-5 {
+  margin: 1.25rem 0 1.25rem 0;
+}
+
+.my-6 {
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.py-0 {
+  padding: 0;
+}
+
+.py-1 {
+  padding: 1rem;
+}
+
+.py-2 {
+  padding: 0.75rem 0 0.75rem 0;
+}
+
+.py-3 {
+  padding: 0.75rem 0 0.75rem 0;
+}
+
+.py-4 {
+  padding: 4rem;
+}
+
+.py-5 {
+  padding: 1.25rem 0 1.25rem 0;
+}
+
+.py-6 {
+  padding: 1.5rem 0 1.5rem 0;
+}
+
+.mx-0 {
+  margin: 0;
+}
+
+.mx-1 {
+  margin: 0 0.25rem 0 0.25rem;
+}
+
+.mx-2 {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.mx-3 {
+  margin: 0 0.75rem 0 0.75rem;
+}
+
+.mx-4 {
+  margin: 0 1rem 0 1rem;
+}
+
+.mx-5 {
+  margin: 0 1.25rem 0 1.25rem;
+}
+
+.mx-6 {
+  margin: 0 1.5rem 0 1.5rem;
+}
+
+.px-0 {
+  padding: 0;
+}
+
+.px-1 {
+  padding: 0 0.25rem 0 0.25rem;
+}
+
+.px-2 {
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.px-3 {
+  padding: 0 0.75rem 0 0.75rem;
+}
+
+.px-4 {
+  padding: 0 1rem 0 1rem;
+}
+
+.px-5 {
+  padding: 0 1.25rem 0 1.25rem;
+}
+
+.px-6 {
+  padding: 0 1.5rem 0 1.5rem;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  align-self: center;
 }
