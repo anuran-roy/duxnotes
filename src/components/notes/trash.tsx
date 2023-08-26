@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShareFromSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faGhost, faShareFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { getDeletedNotes, deleteNoteFromLocalStorage, markNoteAsRestored } from "../../utils/utils";
 import { Note } from "../../types/note";
 
@@ -79,7 +79,7 @@ export default function Trash() {
                                 setMessage("Note permanently deleted.");
                                 setNotes(getDeletedNotes());
                             }}>
-                                <FontAwesomeIcon icon={faTrash} />
+                                <FontAwesomeIcon icon={faGhost} />
                             </div>                            
                         </div>
                     </div>
