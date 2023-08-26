@@ -91,7 +91,7 @@
   background-color: #282c34;
   color: white;
   padding: 1rem 0 0 0;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   max-height: 100%;
 }
@@ -109,15 +109,16 @@
   width: 12.5%;
   min-height: 100vh;
   position: sticky;
-  height: 100%;
-  overflow: scroll;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .navbar-item {
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
   border-bottom: 1px solid #39d2fe;
   border-radius: 2.5%;
 }
@@ -127,7 +128,7 @@
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
   /* border-bottom: 1px solid #39d2fe; */
   border-radius: 2.5%;
 }
@@ -175,18 +176,19 @@
   gap: 10px;
   grid-auto-flow: row; */
   padding: 0 3rem 0 0;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
   overflow-x: hidden;
-  width: 100%;
+  width: 87.5%;
   margin: 0 2% 0 0;
+  max-height: 80vh;
 }
 
 .note {
   padding: 0.5rem;
   margin: 0.5rem;
   flex-grow: 2; 
-  width: 20vw;
-  /* max-width: 100%; */
+  width: 15vw;
   min-height: 25%;
   max-height: 50%;
   border: 1px solid #39d2fe;

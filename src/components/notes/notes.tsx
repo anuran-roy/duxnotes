@@ -36,6 +36,27 @@ export default function Notes() {
         let diff = Math.round((Date.now() - Date.parse(updatedAt)) / 1000);
         let res = `Updated ${diff} seconds ago`;
 
+        if (diff > 60) {
+            res = `Updated ${Math.round(diff/60)} seconds ago`;
+        }
+
+        if (diff > 60) {
+            res = `Updated ${Math.floor(diff/60)} minutes ago`;
+        }
+
+        if (diff > 60*60) {
+            res = `Updated ${Math.floor(diff/3600)} hours ago`;
+        }
+
+        if (diff > 60 * 60 * 24) {
+            res = `Updated ${Math.floor(diff/(3600*24))} days ago`;
+        }
+
+        if (diff > 60 * 60 * 24 * 30) {
+            res = `Updated on ${Date.parse(updatedAt)}`;
+        }
+
+
         return res;
     }
 
@@ -73,7 +94,7 @@ export default function Notes() {
                     setDisplayEditor(false)
                 }} />) : (<></>)
             }
-            <div className="notes-section px-2">
+            <div className="notes-section">
                 {notes.length > 0? (notes.map((note: Note) => (
                     <div className="note flex-row" key={note.id}>
                         <div className="px-2 py-2 clickable" onClick={(_) => {

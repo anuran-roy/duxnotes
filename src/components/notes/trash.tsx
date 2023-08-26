@@ -20,7 +20,27 @@ export default function Trash() {
 
     const findLastUpdated = (updatedAt: string) => {
         let diff = Math.round((Date.now() - Date.parse(updatedAt)) / 1000);
-        let res = `Deleted ${diff} seconds ago`;
+        let res = `Updated ${diff} seconds ago`;
+
+        if (diff > 60) {
+            res = `Updated ${Math.round(diff/60)} seconds ago`;
+        }
+
+        if (diff > 60) {
+            res = `Updated ${Math.floor(diff/60)} minutes ago`;
+        }
+
+        if (diff > 60*60) {
+            res = `Updated ${Math.floor(diff/3600)} hours ago`;
+        }
+
+        if (diff > 60 * 60 * 24) {
+            res = `Updated ${Math.floor(diff/(3600*24))} days ago`;
+        }
+
+        if (diff > 60 * 60 * 24 * 30) {
+            res = `Updated on ${Date.parse(updatedAt)}`;
+        }
 
         return res;
     }
@@ -32,11 +52,11 @@ export default function Trash() {
                 <div className="spacer-x"></div>
             </div>
             <div className="spacer-y"></div>
-            <div className="px-6 mx-6 clickable w-100" onClick={(_: any) => {
+            <div className="px-6 mx-6 clickable" onClick={(_: any) => {
                 setMessage("");
             }}>{message}</div>
             <div className="py-2"></div>
-            <div className="notes-section px-2">
+            <div className="notes-section">
                 {notes.length > 0 ? notes.map((note: Note) => (
                     <div className="note flex-row" key={note.id}>
                         <div className="px-2 py-2">
