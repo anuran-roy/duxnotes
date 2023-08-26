@@ -114,6 +114,7 @@ export default function Notes() {
                         </div>
                         <div>
                             <div className="new-button clickable" onClick={(_: any) => {
+                                setMessage("Note unpinned.");
                                 console.log("Note unpinned.");
                                 unpinNote(note.id);
                                 setPinnedNotes(getPinnedNotes());
@@ -121,7 +122,7 @@ export default function Notes() {
                                 <FontAwesomeIcon icon={faThumbTack} />
                             </div>
                             <div className="remove-button clickable" onClick={(_: any) => {
-                                // setMessage("Note moved to trash.");
+                                setMessage("Note moved to trash.");
                                 console.log("Note moved to trash.");
                                 markNoteAsDeleted(note.id);
                                 setNotes(getSavedNotes());
