@@ -6,8 +6,7 @@ export interface Note {
     updatedAt: string;
     image?: Blob;
     imageSrc?: string;
-    isEditing?: boolean;
-    isPreviewing?: boolean;
+    isPinned?: boolean;
     isDeleted?: boolean;
 }
 

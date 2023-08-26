@@ -216,32 +216,51 @@
   text-align: center;
   font-size: 2rem;
   padding: 1rem;
+  color: white;
   /* margin: 0 1rem 0 1rem; */
 }
 
 .new-button:hover {
-  background-color: #39d2fe;
+  /* background-color: ; */
   text-align: center;
   align-items: center;
-  color: white;
+  color: #39d2fe;
   border: none;
   border-radius: 15%;
   /* font-size: 1rem; */
   /* cursor: pointer; */
 }
 
+.action-button {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  margin: 0 1rem 0 1rem;
+  color: white;
+}
+
+.action-button:hover {
+  /* background-color: #39d2fe; */
+  text-align: center;
+  align-items: center;
+  color: #39d2fe;
+  border: none;
+  border-radius: 15%;
+  cursor: pointer;
+}
+
 .remove-button {
   text-align: center;
   font-size: 2rem;
   padding: 1rem;
+  color: white;
   /* margin: 0 1rem 0 1rem; */
 }
 
 .remove-button:hover {
-  background-color: red;
+  color: red;
   text-align: center;
   align-items: center;
-  color: white;
   border: none;
   border-radius: 15%;
   /* font-size: 1rem; */
@@ -269,6 +288,14 @@
   background-color: #262c34;
   color: white;
   font-size: 1em;
+}
+
+.bg-dark {
+  background-color: #262c34;
+}
+
+.bg-gray {
+  background-color: #333333;
 }
 
 .w-100 {
@@ -474,4 +501,14 @@
   justify-items: center;
   justify-self: center;
   align-self: center;
+}
+
+.b-top {
+  border-top: 1px solid #39d2fe;
+  width: 100%;
+}
+
+.b-bottom {
+  border-bottom: 1px solid #39d2fe;
+  width: 100%;
 }

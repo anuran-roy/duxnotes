@@ -1,5 +1,6 @@
-import { faClose, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faImage, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
 import { Note } from "../../types/note";
 
@@ -63,14 +64,25 @@ export default function Editor(props: any) {
                 </div>
                 <div className="text-left">
                     <label htmlFor="content" className="text-left third-headline">Content</label>
-                    <textarea className="input textarea my-2" id="content" value={content} onChange={(e) => {
+                    {/* <textarea className="input textarea my-2" id="content" value={content} onChange={(e) => {
                         console.log(e.target.value);
                         setContent(e.target.value);
+                        setIsSaved(false);
+                    }} /> */}
+                    <MDEditor height={200} className="input textarea my-2 bg-dark" value={content} onChange={(value?: string) => {
+                        setContent(value? value : "");
                         setIsSaved(false);
                     }} />
                 </div>
                 <div className="py-2"></div>
                 <div className="flex-row">
+                    <div className="mx-2 px-2 py-2 clickable action-button" onClick={() => {
+                        console.log("Add Image Clicked.");
+                    }} id="add_image">
+                        <FontAwesomeIcon icon={ faImage } />
+                    </div>
+                </div>
+                <div className="flex-row py-1">
                     <div className="mx-2 px-2 py-2 clickable new-button" onClick={(_) => saveNote()}>
                         <FontAwesomeIcon icon={ faSave } />
                     </div>

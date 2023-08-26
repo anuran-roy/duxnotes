@@ -9,11 +9,11 @@ export const uploadImage = (file: File) => {
     });
 };
 
-export const readFromLocalStorage: () => any = () => {
+export const readFromLocalStorage: () => Note[] = () => {
     const data = localStorage.getItem('notes');
     console.log("Read from local storage: ", data)
     if (data !== null) {
-        let parsedData: any = JSON.parse(data);
+        let parsedData: Note[] = JSON.parse(data);
         return parsedData;
     }
     return [];
@@ -22,6 +22,11 @@ export const readFromLocalStorage: () => any = () => {
 export const getSavedNotes: () => Note[] = () => {
     let notes = readFromLocalStorage();
     return notes.filter((note: Note) => !note.isDeleted);
+}
+
+export const getPinnedNotes: () => Note[] = () => {
+    let notes = readFromLocalStorage();
+    return notes.filter((note: Note) => !note.isDeleted && note.isPinned);
 }
 
 export const getDeletedNotes: () => Note[] = () => {
@@ -41,8 +46,7 @@ export const readFromLocalStorageById: (id: number) => Promise<Note> = async (id
         content: '',
         createdAt: "",
         updatedAt: "",
-        isEditing: false,
-        isPreviewing: false,
+        isPinned: false,
         isDeleted: false,
     };
 
@@ -83,11 +87,11 @@ export const writeNotesToLocalStorage = (data: Note[]) => {
     localStorage.setItem('notes', JSON.stringify(data));
 }
 
-export const writeNotesToLocalStorageById = (id: string, data: any) => {
+export const writeNoteToLocalStorageById = (id: string, data: Note) => {
     let notes = readFromLocalStorage();
     let filteredNotes = notes.filter((note: any) => note.id !== id);
     filteredNotes.push(data);
-    writeNoteToLocalStorage(filteredNotes);
+    filteredNotes.forEach((note: Note) => writeNoteToLocalStorage(note));
 }
 
 export const markNoteAsDeleted = (id: number) => {
@@ -96,6 +100,24 @@ export const markNoteAsDeleted = (id: number) => {
     if (concernedNote) {
         concernedNote.isDeleted = true;
         concernedNote.updatedAt = Date.now().toString();
+        writeNoteToLocalStorage(concernedNote);
+    }
+}
+
+export const pinNote = (id: number) => {
+    let notes = readFromLocalStorage();
+    let concernedNote: Note | undefined = notes.filter((note: Note) => note.id === id).pop();
+    if (concernedNote) {
+        concernedNote.isPinned = true;
+        writeNoteToLocalStorage(concernedNote);
+    }
+}
+
+export const unpinNote = (id: number) => {
+    let notes = readFromLocalStorage();
+    let concernedNote: Note | undefined = notes.filter((note: Note) => note.id === id).pop();
+    if (concernedNote) {
+        concernedNote.isPinned = false;
         writeNoteToLocalStorage(concernedNote);
     }
 }

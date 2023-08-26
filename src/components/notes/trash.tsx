@@ -65,14 +65,6 @@ export default function Trash() {
                             <p className="note-date">{findLastUpdated(note.updatedAt)}</p>
                         </div>
                         <div className="my-4">
-                            <div className="remove-button clickable" onClick={(_: any) => {
-                                deleteNoteFromLocalStorage(note.id);
-                                setMessage("Note permanently deleted.");
-                                setNotes(getDeletedNotes());
-                            }}>
-                                <FontAwesomeIcon icon={faTrash} />
-                            </div>
-                            <div className="py-3"></div>
                             <div className="new-button clickable tooltip" onClick={(_: any) => {
                                 markNoteAsRestored(note.id);
                                 setMessage("Note restored. See it on your Notes page.");
@@ -81,6 +73,14 @@ export default function Trash() {
                                 <span className="tooltiptext">Restore Entry</span>
                                 <FontAwesomeIcon icon={faShareFromSquare} />
                             </div>
+                            <div className="py-3"></div>
+                            <div className="remove-button clickable" onClick={(_: any) => {
+                                deleteNoteFromLocalStorage(note.id);
+                                setMessage("Note permanently deleted.");
+                                setNotes(getDeletedNotes());
+                            }}>
+                                <FontAwesomeIcon icon={faTrash} />
+                            </div>                            
                         </div>
                     </div>
                 )) : (
