@@ -10,7 +10,7 @@ export default function Notes() {
     let defaultNewNote: Note = {
         id: 0,
         title: "Untitled",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        content: "",
         createdAt: "2020-01-01",
         updatedAt: "2020-01-01"
     };
