@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGhost, faShareFromSquare } from '@fortawesome/free-solid-svg-icons'
-import { getDeletedNotes, deleteNoteFromLocalStorage, markNoteAsRestored } from "../../utils/utils";
+import { getDeletedNotes, deleteNoteFromLocalStorage, markNoteAsRestored, getContentPreview } from "../../utils/utils";
 import { Note } from "../../types/note";
+import Markdown from "markdown-to-jsx";
 
 export default function Trash() {
     const [notes, setNotes] = useState<Note[]>(getDeletedNotes());
@@ -61,8 +62,11 @@ export default function Trash() {
                     <div className="note flex-row" key={note.id}>
                         <div className="px-2 py-2">
                             <h2 className="note-title">{note.title}</h2>
-                            <p className="note-content">{note.content}</p>
-                            <p className="note-date">{findLastUpdated(note.updatedAt)}</p>
+                            <p className="note-content">
+                                {/* {note.content} */}
+                                <Markdown options={{ wrapper: 'aside', forceWrapper: true }}>{getContentPreview(note.content)}</Markdown>
+                            </p>
+                            <p className="note-date">{`[${findLastUpdated(note.updatedAt)}]`}</p>
                         </div>
                         <div className="my-4">
                             <div className="new-button clickable tooltip" onClick={(_: any) => {

@@ -136,3 +136,11 @@ export const deleteNoteFromLocalStorage = (id: number) => {
     let filteredNotes = notes.filter((note: Note) => note.id !== id);
     writeNotesToLocalStorage(filteredNotes);
 }
+
+export const getContentPreview = (content: string) => {
+    let preview = content.slice(0, Math.min(20, content.length));
+    if (content.length > 20) {
+        preview += '...';
+    }
+    return preview;
+}

@@ -1,6 +1,6 @@
-import { faClose, faImage, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MDEditor from "@uiw/react-md-editor";
+import Markdown from "markdown-to-jsx";
 import { useState } from "react";
 import { Note } from "../../types/note";
 
@@ -10,14 +10,14 @@ export default function Editor(props: any) {
     const [content, setContent] = useState<string>(props.note?.content);
     const [createdAt, setCreatedAt] = useState<string>(props.note?.createdAt);
     const [updatedAt, setUpdatedAt] = useState<string>(props.note?.updatedAt);
-    const [id, ] = useState(props.note?.id);
+    const [id,] = useState(props.note?.id);
     const [isSaved, setIsSaved] = useState(true);
     const [noteState, setNoteState] = useState<string>(props.note?.id ? "Edit Note" : "New Note");
 
     const closeEditor = () => {
         props.onClose();
     }
-    
+
     const saveNote = () => {
         let note: Note = {
             id: id,
@@ -64,30 +64,36 @@ export default function Editor(props: any) {
                 </div>
                 <div className="text-left">
                     <label htmlFor="content" className="text-left third-headline">Content</label>
-                    {/* <textarea className="input textarea my-2" id="content" value={content} onChange={(e) => {
-                        console.log(e.target.value);
-                        setContent(e.target.value);
-                        setIsSaved(false);
-                    }} /> */}
-                    <MDEditor height={200} className="input textarea my-2 bg-dark" value={content} onChange={(value?: string) => {
+                    <div className="flex-column">
+                        <textarea className="input textarea my-2" id="content" value={content} onChange={(e) => {
+                            console.log(e.target.value);
+                            setContent(e.target.value);
+                            setIsSaved(false);
+                        }} />
+                        <div id="previewPane">
+                            <div className="py-2 third-headline">Preview:</div>
+                            <Markdown options={{ wrapper: 'aside', forceWrapper: true }}>{content}</Markdown>
+                        </div>
+                    </div>
+                    {/* <MDEditor height={200} className="input textarea my-2 bg-dark" value={content} onChange={(value?: string) => {
                         setContent(value? value : "");
                         setIsSaved(false);
-                    }} />
+                    }} /> */}
                 </div>
                 <div className="py-2"></div>
-                <div className="flex-row">
+                {/* <div className="flex-row">
                     <div className="mx-2 px-2 py-2 clickable action-button" onClick={() => {
                         console.log("Add Image Clicked.");
                     }} id="add_image">
-                        <FontAwesomeIcon icon={ faImage } />
+                        <FontAwesomeIcon icon={faImage} />
                     </div>
-                </div>
+                </div> */}
                 <div className="flex-row py-1">
                     <div className="mx-2 px-2 py-2 clickable new-button" onClick={(_) => saveNote()}>
-                        <FontAwesomeIcon icon={ faSave } />
+                        <FontAwesomeIcon icon={faSave} />
                     </div>
                     <div className="mx-2 px-2 py-2 clickable new-button" onClick={closeEditor}>
-                        <FontAwesomeIcon icon={ faClose } />
+                        <FontAwesomeIcon icon={faClose} />
                     </div>
                     {isSaved ? <p className="px-3">Changes Saved.</p> : <p className="px-3">Not saved yet!</p>}
                     <div className="spacer-x"></div>

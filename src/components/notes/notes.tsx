@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileCirclePlus, faThumbTack, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Editor from "./editor";
-import { markNoteAsDeleted, getSavedNotes, writeNoteToLocalStorage, pinNote, unpinNote, getPinnedNotes } from "../../utils/utils";
+import { markNoteAsDeleted, getSavedNotes, writeNoteToLocalStorage, pinNote, unpinNote, getPinnedNotes, getContentPreview } from "../../utils/utils";
 import { Note } from "../../types/note";
-
+import Markdown from "markdown-to-jsx";
 export default function Notes() {
     const [displayEditor, setDisplayEditor] = useState(false);
     let defaultNewNote: Note = {
@@ -42,19 +42,19 @@ export default function Notes() {
         let res = `Updated ${diff} seconds ago`;
 
         if (diff > 60) {
-            res = `Updated ${Math.round(diff/60)} seconds ago`;
+            res = `Updated ${Math.round(diff / 60)} seconds ago`;
         }
 
         if (diff > 60) {
-            res = `Updated ${Math.floor(diff/60)} minutes ago`;
+            res = `Updated ${Math.floor(diff / 60)} minutes ago`;
         }
 
-        if (diff > 60*60) {
-            res = `Updated ${Math.floor(diff/3600)} hours ago`;
+        if (diff > 60 * 60) {
+            res = `Updated ${Math.floor(diff / 3600)} hours ago`;
         }
 
         if (diff > 60 * 60 * 24) {
-            res = `Updated ${Math.floor(diff/(3600*24))} days ago`;
+            res = `Updated ${Math.floor(diff / (3600 * 24))} days ago`;
         }
 
         if (diff > 60 * 60 * 24 * 30) {
@@ -100,80 +100,89 @@ export default function Notes() {
                 }} />) : (<></>)
             }
             {/* <PinnedNotes /> */}
-            <div className="third-headline py-3 mx-3 text-left">Pinned Notes</div>
-            <div className="notes-section">
-                {pinnedNotes.length > 0 ? (pinnedNotes.map((note: Note) => (
-                    <div className="note flex-row" key={note.id}>
-                        <div className="px-2 py-2 clickable" onClick={(_) => {
-                            // setNoteOnDisplay(note);
-                            // setDisplayEditor(true);
-                        }}>
-                            <h2 className="note-title">{note.title}</h2>
-                            <p className="note-content">{note.content}</p>
-                            {/* <p className="note-date">{findLastUpdated(note.updatedAt)}</p> */}
-                        </div>
-                        <div>
-                            <div className="new-button clickable" onClick={(_: any) => {
-                                setMessage("Note unpinned.");
-                                console.log("Note unpinned.");
-                                unpinNote(note.id);
-                                setPinnedNotes(getPinnedNotes());
+            <div id="pinned-notes">
+                <div className="third-headline py-3 mx-3 text-left">Pinned Notes</div>
+                <div className="notes-section">
+                    {pinnedNotes.length > 0 ? (pinnedNotes.map((note: Note) => (
+                        <div className="note flex-row" key={note.id}>
+                            <div className="px-2 py-2 clickable" onClick={(_) => {
+                                setNoteOnDisplay(note);
+                                setDisplayEditor(true);
                             }}>
-                                <FontAwesomeIcon icon={faThumbTack} />
+                                <h2 className="note-title">{note.title}</h2>
+                                <p className="note-content">
+                                    <Markdown options={{ wrapper: 'aside', forceWrapper: true }}>{getContentPreview(note.content)}</Markdown>
+                                </p>
+                                <p className="note-date">{`[${findLastUpdated(note.updatedAt)}]`}</p>
                             </div>
-                            <div className="remove-button clickable" onClick={(_: any) => {
-                                setMessage("Note moved to trash.");
-                                console.log("Note moved to trash.");
-                                markNoteAsDeleted(note.id);
-                                setNotes(getSavedNotes());
-                                setPinnedNotes(getPinnedNotes());
-                            }}>
-                                <FontAwesomeIcon icon={faTrash} />
+                            <div>
+                                <div className="new-button clickable" onClick={(_: any) => {
+                                    setMessage("Note unpinned.");
+                                    console.log("Note unpinned.");
+                                    unpinNote(note.id);
+                                    setPinnedNotes(getPinnedNotes());
+                                }}>
+                                    <FontAwesomeIcon icon={faThumbTack} />
+                                </div>
+                                <div className="remove-button clickable" onClick={(_: any) => {
+                                    setMessage("Note moved to trash.");
+                                    console.log("Note moved to trash.");
+                                    markNoteAsDeleted(note.id);
+                                    setNotes(getSavedNotes());
+                                    setPinnedNotes(getPinnedNotes());
+                                }}>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))) : (
-                    <div className="center w-100">
-                        <span>No pinned notes.</span>
-                    </div>
+                    ))) : (
+                        <div className="center w-100">
+                            <span>No pinned notes.</span>
+                        </div>
                         // <></>
-                )}
+                    )}
+                </div>
             </div>
             <div className="spacer-y"></div>
-            <div className="third-headline py-3 mx-3 text-left">Saved Notes</div>
-            <div className="notes-section">
-                {notes.length > 0? (notes.map((note: Note) => (
-                    <div className="note flex-row" key={note.id}>
-                        <div className="px-2 py-2 clickable" onClick={(_) => {
-                        setNoteOnDisplay(note);
-                        setDisplayEditor(true);
-                    }}>
-                            <h2 className="note-title">{note.title}</h2>
-                            <p className="note-content">{note.content}</p>
-                            <p className="note-date">{findLastUpdated(note.updatedAt)}</p>
-                        </div>
-                        <div>
-                            <div className="new-button clickable" onClick={(_: any) => {
-                                setMessage("Pinned note.");
-                                pinNote(note.id);
-                                // setNotes(getSavedNotes());
-                                setPinnedNotes(getPinnedNotes());
+            <div id="saved-notes">
+                <div className="third-headline py-3 mx-3 text-left">Saved Notes</div>
+                <div className="notes-section">
+                    {notes.length > 0 ? (notes.map((note: Note) => (
+                        <div className="note flex-row" key={note.id}>
+                            <div className="px-2 py-2 clickable" onClick={(_) => {
+                                setNoteOnDisplay(note);
+                                setDisplayEditor(true);
                             }}>
-                                <FontAwesomeIcon icon={faThumbTack} />
+                                <h2 className="note-title">{note.title}</h2>
+                                <p className="note-content">
+                                    {/* {note.content} */}
+                                    <Markdown options={{ wrapper: 'aside', forceWrapper: true }}>{getContentPreview(note.content)}</Markdown>
+                                </p>
+                                <p className="note-date my-2">{`[${findLastUpdated(note.updatedAt)}]`}</p>
                             </div>
-                            <div className="remove-button clickable" onClick={(_: any) => {
-                                setMessage("Note moved to trash.");
-                                markNoteAsDeleted(note.id);
-                                setNotes(getSavedNotes());
-                            }}>
-                                <FontAwesomeIcon icon={faTrash} />
+                            <div>
+                                <div className="new-button clickable" onClick={(_: any) => {
+                                    setMessage("Pinned note.");
+                                    pinNote(note.id);
+                                    // setNotes(getSavedNotes());
+                                    setPinnedNotes(getPinnedNotes());
+                                }}>
+                                    <FontAwesomeIcon icon={faThumbTack} />
+                                </div>
+                                <div className="remove-button clickable" onClick={(_: any) => {
+                                    setMessage("Note moved to trash.");
+                                    markNoteAsDeleted(note.id);
+                                    setNotes(getSavedNotes());
+                                }}>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))) : (
-                    <div className="center w-100">
-                        <span>No notes to display.</span>
-                    </div>)}
+                    ))) : (
+                        <div className="center w-100">
+                            <span>No notes to display.</span>
+                        </div>)}
+                </div>
             </div>
         </div>
     )

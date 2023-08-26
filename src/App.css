@@ -512,3 +512,20 @@
   border-bottom: 1px solid #39d2fe;
   width: 100%;
 }
+
+.note-content {
+  display: container;
+  width: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  flex-grow: 1;
+}
