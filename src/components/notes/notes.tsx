@@ -5,15 +5,9 @@ import Editor from "./editor";
 import { markNoteAsDeleted, getSavedNotes, writeNoteToLocalStorage, pinNote, unpinNote, getPinnedNotes, getContentPreview } from "../../utils/utils";
 import { Note } from "../../types/note";
 import Markdown from "markdown-to-jsx";
+import { defaultNewNote } from "../../utils/reducers/reducer";
 export default function Notes() {
     const [displayEditor, setDisplayEditor] = useState(false);
-    let defaultNewNote: Note = {
-        id: 0,
-        title: "Untitled",
-        content: "",
-        createdAt: "2020-01-01",
-        updatedAt: "2020-01-01"
-    };
 
     const [message, setMessage] = useState<string>("");
     const [noteOnDisplay, setNoteOnDisplay] = useState<Note>(defaultNewNote);
@@ -83,9 +77,9 @@ export default function Notes() {
                 </div>
             </div>
             <div className="spacer-y"></div>
-            <div className="px-6 mx-6 clickable w-100" onClick={(_: any) => {
+            {message.length > 0 ? (<div className="px-6 mx-6 clickable top-message py-6" onClick={(_: any) => {
                 setMessage("");
-            }}>{message}</div>
+            }}>{message}</div>): <></>}
             {displayEditor ? (<Editor note={noteOnDisplay}
                 onDelete={(id: number) => {
                     markNoteAsDeleted(id);

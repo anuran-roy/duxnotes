@@ -53,9 +53,9 @@ export default function Trash() {
                 <div className="spacer-x"></div>
             </div>
             <div className="spacer-y"></div>
-            <div className="px-6 mx-6 clickable" onClick={(_: any) => {
+            {message.length > 0 ? (<div className="px-6 mx-6 clickable top-message py-6" onClick={(_: any) => {
                 setMessage("");
-            }}>{message}</div>
+            }}>{message}</div>): <></>}
             <div className="py-2"></div>
             <div className="notes-section">
                 {notes.length > 0 ? notes.map((note: Note) => (

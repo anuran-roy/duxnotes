@@ -562,3 +562,7 @@ img {
   text-decoration: none;
   color: inherit;
 }
+
+.top-message {
+  border: 1px solid #39d2fe;
+}
