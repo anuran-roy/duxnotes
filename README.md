@@ -1,3 +1,7 @@
+<details>
+<summary><b><i>Standard <code>create-react-app</code> instructions</i></b></summary>
+<br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +48,24 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+</details>
+
+
+<details>
+    <summary><b>DuxNotes</b></summary>
+    <br>
+
+# What is DuxNotes?
+
+DuxNotes is a simple note-taking app that allows you to create, edit, and delete notes - using React and TypeScript.
+
+## Features
+
+- Simple and Minimal
+- Create, edit, and delete notes
+- Interactive Markdown Editor with Support with Images
+- Trash Feature where you can restore or permanently delete notes.
+- Pin Notes to the top of the list
+- Lightweight and fast
+
+</details>
