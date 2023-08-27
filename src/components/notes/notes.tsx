@@ -3,17 +3,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileCirclePlus, faThumbTack, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Editor from "./editor";
 import { markNoteAsDeleted, getSavedNotes, writeNoteToLocalStorage, pinNote, unpinNote, getPinnedNotes, getContentPreview } from "../../utils/utils";
-import { Note } from "../../types/note";
+import { defaultNewNote, Note } from "../../types/note";
 import Markdown from "markdown-to-jsx";
-import { defaultNewNote } from "../../utils/reducers/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../utils/redux/store";
+import { addItem, moveToTrash, unpinItem } from "../../utils/redux/actions";
 export default function Notes() {
     const [displayEditor, setDisplayEditor] = useState(false);
 
     const [message, setMessage] = useState<string>("");
     const [noteOnDisplay, setNoteOnDisplay] = useState<Note>(defaultNewNote);
-    const [pinnedNotes, setPinnedNotes] = useState<Note[]>(getPinnedNotes());
-    const [notes, setNotes] = useState<Note[]>(getSavedNotes());
+    // const [pinnedNotes, setPinnedNotes] = useState<Note[]>(getPinnedNotes());
+    // const [notes, setNotes] = useState<Note[]>(getSavedNotes());
 
+    const getPinnededNotesFromRedux = (state: RootState) => state.notes.filter((note: Note) => !note.isDeleted && note.isPinned);
+    const getSavedNotesFromRedux = (state: RootState) => state.notes.filter((note: Note) => !note.isDeleted && note.isPinned);
+    const [pinnedNotes, setPinnedNotes] = useState<Note[]>(useSelector(getPinnededNotesFromRedux));
+    const [notes, setNotes] = useState<Note[]>(useSelector(getSavedNotesFromRedux));
+
+
+    // const yourStateValue = useSelector((state: RootState) => state.counter.yourStateValue);
+    const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
         document.title = "Notes";
         // setNotes(readFromLocalStorage());
@@ -86,8 +96,10 @@ export default function Notes() {
                 }}
                 onSave={(note: Note) => {
                     console.log(note);
-                    writeNoteToLocalStorage(note);
-                    setNotes(getSavedNotes());
+                    // writeNoteToLocalStorage(note);
+                    dispatch(addItem(note));
+                    // setNotes(useSelector(getSavedNotesFromRedux));
+
                 }}
                 onClose={(_: any) => {
                     setDisplayEditor(false)
@@ -113,17 +125,19 @@ export default function Notes() {
                                 <div className="new-button clickable" onClick={(_: any) => {
                                     setMessage("Note unpinned.");
                                     console.log("Note unpinned.");
-                                    unpinNote(note.id);
-                                    setPinnedNotes(getPinnedNotes());
+                                    // unpinNote(note.id);
+                                    unpinItem(note);
+                                    // setPinnedNotes(getPinnedNotes());
                                 }}>
                                     <FontAwesomeIcon icon={faThumbTack} />
                                 </div>
                                 <div className="remove-button clickable" onClick={(_: any) => {
                                     setMessage("Note moved to trash.");
                                     console.log("Note moved to trash.");
-                                    markNoteAsDeleted(note.id);
-                                    setNotes(getSavedNotes());
-                                    setPinnedNotes(getPinnedNotes());
+                                    // markNoteAsDeleted(note.id);
+                                    moveToTrash(note);
+                                    // setNotes(getSavedNotes());
+                                    // setPinnedNotes(getPinnedNotes());
                                 }}>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </div>

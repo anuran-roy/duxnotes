@@ -3,7 +3,7 @@ import { toTitleCase } from "../utils/utils"
 
 export default function NavBar() {
     return (
-        <div className="navbar flex-column px-6 mx-6">
+        <div className="navbar px-6 mx-6">
             <h2 className="navbar-heading py-5">DuxNotes</h2>
             <div id="navbar-options py-5">
                 {
