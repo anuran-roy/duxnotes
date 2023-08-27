@@ -63,9 +63,16 @@ DuxNotes is a simple note-taking app that allows you to create, edit, and delete
 
 - Simple and Minimal
 - Create, edit, and delete notes
-- Interactive Markdown Editor with Support with Images
+- WYSIWYG Markdown Editor with Support with Images
 - Trash Feature where you can restore or permanently delete notes.
 - Pin Notes to the top of the list
 - Lightweight and fast
+
+## Screenshots
+
+![WYSIWYG Markdown Editor](https://github.com/anuran-roy/duxnotes/assets/76481787/9f3b6af2-0630-411e-a0b8-ff230c98678a)
+![Notes Section](https://github.com/anuran-roy/duxnotes/assets/76481787/03e01d9a-1480-4b29-b796-1ace16992af6)
+![Trash Section](https://github.com/anuran-roy/duxnotes/assets/76481787/86318011-63c9-4c7f-ba21-e78c246a1ee9)
+
 
 </details>
