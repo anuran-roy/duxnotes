@@ -1,0 +1,6 @@
+version: '3'
+services:
+  duxnotes:
+    image: 2441139/duxnotes:latest
+    ports:
+      - '7092:3000'  # Map host port 7092 to container port 3000 
